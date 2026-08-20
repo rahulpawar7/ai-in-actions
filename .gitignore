@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.DS_Store
+*.log
+uploads
+coverage
+.vscode
+.idea
+*.tsbuildinfo
+client/dist
+server/dist

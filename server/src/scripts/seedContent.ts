@@ -1,0 +1,213 @@
+const BOOK = '/book';
+export const WORKSHOP_START = new Date('2026-08-24T14:30:00.000Z');
+export const WORKSHOP_END = new Date('2026-09-02T16:30:00.000Z');
+export const REGISTRATION_DEADLINE = new Date('2026-08-23T18:29:59.000Z');
+
+export const siteSettingsSeed = {
+  key: 'default',
+  brandName: 'AI IN ACTION',
+  brandInitials: 'AIA',
+  brandTagline: 'Learn · Implement · Automate · Grow',
+  announcementBar: {
+    isEnabled: true,
+    text: 'Founding batch · 24 August 2026 · 30 seats · Bonuses worth ₹25,000+',
+    highlight: 'Batch 01',
+    cta: { label: 'Secure seat', url: BOOK, variant: 'primary' as const, isExternal: false, isActive: true },
+  },
+  navLinks: [
+    { label: 'The engine', href: '#engine', isExternal: false, isActive: true, order: 0 },
+    { label: 'Workshop', href: '#experience', isExternal: false, isActive: true, order: 1 },
+    { label: 'Curriculum', href: '#curriculum', isExternal: false, isActive: true, order: 2 },
+    { label: 'Investment', href: '#pricing', isExternal: false, isActive: true, order: 3 },
+    { label: 'FAQ', href: '#faq', isExternal: false, isActive: true, order: 4 },
+  ],
+  headerCta: {
+    label: 'Secure Your Seat',
+    url: BOOK,
+    variant: 'primary' as const,
+    isExternal: false,
+    isActive: true,
+    ariaLabel: 'Open native booking for AI IN ACTION',
+  },
+  stickyMobileCta: { isEnabled: true, label: 'Secure Your Seat', helperText: '₹10,000 · 30 seats' },
+  footer: {
+    description:
+      'AI IN ACTION is a 10-day live implementation workshop. You leave with working systems inside the business — not another folder of notes.',
+    linkGroups: [
+      {
+        title: 'Workshop',
+        order: 0,
+        links: [
+          { label: 'Curriculum', href: '#curriculum', isExternal: false, isActive: true, order: 0 },
+          { label: 'What you build', href: '#outputs', isExternal: false, isActive: true, order: 1 },
+          { label: 'Investment', href: '#pricing', isExternal: false, isActive: true, order: 2 },
+        ],
+      },
+      {
+        title: 'Support',
+        order: 1,
+        links: [
+          { label: 'FAQ', href: '#faq', isExternal: false, isActive: true, order: 0 },
+          { label: 'Talk to us', href: '#contact', isExternal: false, isActive: true, order: 1 },
+          { label: 'Book a seat', href: BOOK, isExternal: false, isActive: true, order: 2 },
+        ],
+      },
+    ],
+    copyright: `© ${new Date().getFullYear()} AI IN ACTION. All rights reserved.`,
+    disclaimer: 'Results depend on how consistently you implement. This is a working workshop, not a lecture series.',
+  },
+  socialLinks: [{ platform: 'whatsapp', url: 'https://wa.me/919879208321', label: 'WhatsApp', isActive: true, order: 0 }],
+  sectionVisibility: {
+    announcement: true,
+    engine: true,
+    visualization: true,
+    transformation: true,
+    experience: true,
+    outputs: true,
+    workflows: true,
+    usecases: true,
+    curriculum: true,
+    speakers: true,
+    videos: true,
+    testimonials: true,
+    bonuses: true,
+    pricing: true,
+    scarcity: true,
+    faq: true,
+    contact: true,
+    finalCta: true,
+  },
+  maintenanceMode: { isEnabled: false, message: 'The workshop studio is updating. Please check back shortly.' },
+};
+
+export const seoSettingsSeed = {
+  key: 'default',
+  siteName: 'AI IN ACTION',
+  defaultTitle: 'AI IN ACTION — Practical AI Implementation Workshop for Business Owners',
+  titleTemplate: '%s | AI IN ACTION',
+  defaultDescription:
+    'A 10-day live workshop for business owners who want AI running inside the business. Native booking. Starts 24 August 2026. 30 seats.',
+  keywords: [
+    'AI workshop for business owners',
+    'practical AI implementation',
+    'AI automation India',
+    'AI in action workshop',
+  ],
+  canonicalUrl: 'https://aiinaction.in',
+  twitterCardType: 'summary_large_image',
+  robots: 'index, follow',
+  themeColor: '#06040E',
+  locale: 'en_IN',
+  organization: {
+    name: 'AI IN ACTION',
+    url: 'https://aiinaction.in',
+    phone: '+91 98792 08321',
+    addressRegion: 'Gujarat',
+    addressCountry: 'IN',
+  },
+  structuredData: { enableOrganization: true, enableEvent: true, enableFaq: true },
+};
+
+export const heroSeed = {
+  key: 'default',
+  eyebrow: 'Live implementation workshop · Batch 01 · 24 August 2026',
+  headlineLines: ['AI is not the future.', 'AI is in action.'],
+  emphasisWords: ['action'],
+  subheadline:
+    'Ten evenings. One business. Working AI systems installed — not another course you never finish.',
+  supportingText:
+    'Bring a real process. Leave with it running. Built for owners who implement, not spectators.',
+  primaryCta: {
+    label: 'Secure Your Seat',
+    url: BOOK,
+    variant: 'primary' as const,
+    isExternal: false,
+    isActive: true,
+    ariaLabel: 'Book the AI IN ACTION workshop',
+  },
+  secondaryCta: {
+    label: 'Watch the engine',
+    url: '#engine',
+    variant: 'ghost' as const,
+    isExternal: false,
+    isActive: true,
+  },
+  highlights: [
+    { label: 'Starts', value: '24 August 2026', icon: 'calendar', order: 0, isActive: true },
+    { label: 'Mode', value: 'Live on Zoom', icon: 'video', order: 1, isActive: true },
+    { label: 'Duration', value: '10 evenings', icon: 'clock', order: 2, isActive: true },
+    { label: 'Seats', value: '30 owners', icon: 'users', order: 3, isActive: true },
+  ],
+  trustSignals: ['No coding', 'Built for owners', 'Support until the last session'],
+  marqueeItems: [
+    'Save time',
+    'Cut operational cost',
+    'Automate follow-ups',
+    'Document the business',
+    'Ship a weekly report',
+    'Grow without extra headcount',
+  ],
+  isActive: true,
+};
+
+export const workshopSeed = {
+  name: 'AI IN ACTION',
+  tagline: 'Practical AI implementation for business owners',
+  description:
+    'A 10-day live workshop for owners who want AI running inside operations — quotations, follow-ups, support, reporting and automation — by day ten.',
+  startDate: WORKSHOP_START,
+  endDate: WORKSHOP_END,
+  batchName: 'Founding Batch 01',
+  batchNumber: 1,
+  mode: 'Live on Zoom',
+  platform: 'Zoom',
+  durationLabel: '10 Days',
+  totalDays: 10,
+  sessionDurationLabel: '1.5–2 Hours',
+  totalLearningHours: 20,
+  language: 'Hindi + English',
+  timezone: 'Asia/Kolkata',
+  sessionTimeLabel: '8:00 PM – 10:00 PM IST',
+  capacity: 30,
+  seatsAvailable: 30,
+  pricing: {
+    currency: 'INR',
+    currencySymbol: '₹',
+    currentPrice: 10_000,
+    futurePrice: 15_000,
+    priceNote: 'One-time founding-batch investment. Includes bonuses and recordings.',
+    bonusValue: 25_000,
+    bonusValueLabel: 'Bonuses worth ₹25,000+',
+  },
+  registrationStatus: 'open' as const,
+  enrollmentStatus: 'upcoming' as const,
+  registrationDeadline: REGISTRATION_DEADLINE,
+  priceIncreaseDate: WORKSHOP_START,
+  urgency: {
+    countdownEnabled: true,
+    countdownLabel: 'Registration closes in',
+    countdownTarget: REGISTRATION_DEADLINE,
+    countdownExpiredMessage: 'Registration for the founding batch has closed.',
+    seatsCounterEnabled: true,
+    seatsMessageTemplate: '{{seats}} of {{capacity}} seats remaining',
+    priceIncreaseNoticeEnabled: true,
+    priceIncreaseMessage: 'Next batch is {{futurePrice}}. This batch is {{price}}.',
+    limitedOfferEnabled: true,
+    limitedOfferMessage: 'Founding-batch pricing — Batch 01 only',
+  },
+  highlights: [
+    { icon: 'calendar', label: 'Starts', value: '24 August 2026', order: 0, isActive: true },
+    { icon: 'video', label: 'Mode', value: 'Live on Zoom', order: 1, isActive: true },
+    { icon: 'clock', label: 'Duration', value: '10 Days', order: 2, isActive: true },
+    { icon: 'users', label: 'Batch', value: '30 participants', order: 3, isActive: true },
+  ],
+  inclusions: [
+    '10 live implementation sessions on Zoom',
+    '20+ hours of practical training',
+    'Technical support till the workshop ends',
+    'Session recordings for the batch duration',
+    'Prompt vault, automation blueprints and SOP templates',
+    'Bonuses worth ₹25,000+ included',
+  ],
+  isActive: true,
+};

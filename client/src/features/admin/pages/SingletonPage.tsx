@@ -1,0 +1,1 @@
+export { SingletonPage } from './CollectionPage';
