@@ -1,49 +1,84 @@
 import { useState } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { ExternalLink, Menu, X } from 'lucide-react';
 import { useAuth } from '../auth/AuthContext';
 import { BrandMark } from '@/components/ui/BrandMark';
-import { Button } from '@/components/ui/Button';
+import { AdminButton } from './AdminButton';
 import { cn } from '@/lib/utils';
 
-const LINKS = [
-  { to: '/admin', label: 'Overview', end: true },
-  { to: '/admin/hero', label: 'Hero' },
-  { to: '/admin/site-settings', label: 'Site' },
-  { to: '/admin/workshops', label: 'Workshops' },
-  { to: '/admin/curriculum', label: 'Curriculum' },
-  { to: '/admin/sections', label: 'Sections' },
-  { to: '/admin/features', label: 'Features' },
-  { to: '/admin/bonuses', label: 'Bonuses' },
-  { to: '/admin/testimonials', label: 'Testimonials' },
-  { to: '/admin/faqs', label: 'FAQ' },
-  { to: '/admin/speakers', label: 'Speakers' },
-  { to: '/admin/gallery', label: 'Gallery' },
-  { to: '/admin/contacts', label: 'Contacts' },
-  { to: '/admin/registrations', label: 'Registrations' },
-  { to: '/admin/payments', label: 'Payments' },
-  { to: '/admin/seo', label: 'SEO' },
+const NAV_GROUPS: { label: string; links: { to: string; label: string; end?: boolean }[] }[] = [
+  {
+    label: 'Overview',
+    links: [{ to: '/admin', label: 'Dashboard', end: true }],
+  },
+  {
+    label: 'Landing content',
+    links: [
+      { to: '/admin/hero', label: 'Hero' },
+      { to: '/admin/site-settings', label: 'Site settings' },
+      { to: '/admin/sections', label: 'Sections' },
+      { to: '/admin/features', label: 'Features' },
+    ],
+  },
+  {
+    label: 'Workshop',
+    links: [
+      { to: '/admin/workshops', label: 'Workshops' },
+      { to: '/admin/curriculum', label: 'Curriculum' },
+      { to: '/admin/bonuses', label: 'Bonuses' },
+    ],
+  },
+  {
+    label: 'Social proof',
+    links: [
+      { to: '/admin/testimonials', label: 'Testimonials' },
+      { to: '/admin/speakers', label: 'Speakers' },
+      { to: '/admin/gallery', label: 'Gallery' },
+      { to: '/admin/faqs', label: 'FAQ' },
+      { to: '/admin/contacts', label: 'Contacts' },
+    ],
+  },
+  {
+    label: 'Operations',
+    links: [
+      { to: '/admin/registrations', label: 'Registrations' },
+      { to: '/admin/payments', label: 'Payments' },
+    ],
+  },
+  {
+    label: 'Settings',
+    links: [{ to: '/admin/seo', label: 'SEO' }],
+  },
 ];
+
+const ALL_LINKS = NAV_GROUPS.flatMap((g) => g.links);
 
 function NavItems({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <>
-      {LINKS.map((link) => (
-        <NavLink
-          key={link.to}
-          to={link.to}
-          end={link.end}
-          onClick={onNavigate}
-          className={({ isActive }) =>
-            cn(
-              'block rounded-lg px-3 py-2.5 text-sm font-medium transition',
-              isActive ? 'bg-ink text-paper shadow-sm' : 'text-ink/70 hover:bg-paper-300 hover:text-ink',
-            )
-          }
-        >
-          {link.label}
-        </NavLink>
+      {NAV_GROUPS.map((group) => (
+        <div key={group.label} className="mb-4 last:mb-0">
+          <p className="mb-1.5 px-3 font-mono text-[0.58rem] uppercase tracking-[0.18em] text-ink/40">{group.label}</p>
+          <div className="space-y-0.5">
+            {group.links.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                end={link.end}
+                onClick={onNavigate}
+                className={({ isActive }) =>
+                  cn(
+                    'block rounded-lg px-3 py-2 text-sm font-medium transition',
+                    isActive ? 'bg-royal-600 text-white shadow-sm' : 'text-ink/70 hover:bg-white hover:text-ink',
+                  )
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
+        </div>
       ))}
     </>
   );
@@ -55,20 +90,19 @@ export function AdminLayout() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const currentLabel = LINKS.find((l) => (l.end ? location.pathname === l.to : location.pathname.startsWith(l.to)))?.label ?? 'Studio';
+  const currentLabel = ALL_LINKS.find((l) => (l.end ? location.pathname === l.to : location.pathname.startsWith(l.to)))?.label ?? 'Studio';
 
   return (
-    <div className="admin-shell min-h-screen bg-paper text-ink">
-      {/* Desktop sidebar */}
+    <div className="admin-shell min-h-screen text-ink">
       <aside className="admin-sidebar fixed inset-y-0 left-0 z-40 hidden w-60 overflow-y-auto border-r border-line-paper bg-paper-100 p-4 lg:block xl:w-64">
         <BrandMark linkToHome />
         <p className="mt-2 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-ink/45">CMS Studio</p>
-        <nav className="mt-6 space-y-0.5">
-          <NavItems />
-        </nav>
+        <a href="/" target="_blank" rel="noopener noreferrer" className="admin-preview-link mt-4 w-full justify-center text-xs">
+          <ExternalLink className="h-3.5 w-3.5" /> View live site
+        </a>
+        <nav className="mt-5">{<NavItems />}</nav>
       </aside>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
         {menuOpen ? (
           <>
@@ -94,20 +128,18 @@ export function AdminLayout() {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              <nav className="mt-6 flex-1 space-y-0.5 overflow-y-auto">
-                <NavItems onNavigate={() => setMenuOpen(false)} />
-              </nav>
+              <nav className="mt-6 flex-1 overflow-y-auto">{<NavItems onNavigate={() => setMenuOpen(false)} />}</nav>
             </motion.aside>
           </>
         ) : null}
       </AnimatePresence>
 
       <div className="lg:ml-60 xl:ml-64">
-        <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-line-paper bg-paper/95 px-4 py-3 backdrop-blur-md sm:px-6">
+        <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-line-paper bg-white/90 px-4 py-3 backdrop-blur-md sm:px-6">
           <div className="flex min-w-0 items-center gap-3">
             <button
               type="button"
-              className="rounded-lg border border-line-paper p-2 lg:hidden"
+              className="rounded-lg border border-line-paper bg-white p-2 lg:hidden"
               aria-label="Open menu"
               onClick={() => setMenuOpen(true)}
             >
@@ -118,16 +150,17 @@ export function AdminLayout() {
               <p className="truncate font-mono text-[0.58rem] uppercase tracking-wider text-ink/45">{admin?.email}</p>
             </div>
           </div>
-          <Button
+          <AdminButton
             variant="secondary"
-            className="shrink-0 !px-3 !py-2 !text-xs sm:!px-4 sm:!text-sm !text-ink"
+            size="sm"
+            className="shrink-0"
             onClick={async () => {
               await logout();
               navigate('/admin/login');
             }}
           >
             Sign out
-          </Button>
+          </AdminButton>
         </header>
 
         <main className="admin-main px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
